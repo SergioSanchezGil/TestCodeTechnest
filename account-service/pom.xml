@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>technest.testcode.accountservice.AccountServiceApplication</start-class>
 	</properties>
 
 	<dependencies>
