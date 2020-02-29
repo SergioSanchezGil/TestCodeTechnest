@@ -1,5 +1,8 @@
 package technest.testcode.accountservice.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,6 +41,26 @@ public class AccountService {
 					.body(account.getId());
 		}
 
+	}
+	
+	/**
+	 * Get list of all accounts.
+	 * @return the response with the status code, header and the list (body)
+	 */
+	public ResponseEntity<List<Account>> getAllAccounts() {
+		List<Account> accounts = new ArrayList<Account>();
+		accountRepository.findAll().forEach(account -> accounts.add(account));
+		return ResponseEntity.status(HttpStatus.OK).header(HttpHeaders.CONTENT_TYPE, "application/json").body(accounts);
+	}
+	
+	/**
+	 * Get an account by id.
+	 * @param id of the account
+	 * @return the response with the status code, header and the account (body)
+	 */
+	public ResponseEntity<Account> getAccountById(int id) {
+		return ResponseEntity.status(HttpStatus.OK).header(HttpHeaders.CONTENT_TYPE, "application/json")
+				.body(accountRepository.findById(id).get());
 	}
 
 }
