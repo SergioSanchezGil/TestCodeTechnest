@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,6 +58,20 @@ public class AccountController {
 	@GetMapping("/{id}")
 	private ResponseEntity<Account> getAccount(@PathVariable("id") int id) {
 		return accountService.getAccountById(id);
+	}
+	
+	/**
+	 * Transfer money between two accounts.
+	 * @param source account id
+	 * @param target account id
+	 * @param amount to transfer
+	 * @return the response with the status code, header and an information message (body)
+	 */
+	@PutMapping("/transfer/{sourceId}/{targetId}/{amount}")
+	private ResponseEntity<String> transferMoney(@PathVariable("sourceId") int sourceId,
+			@PathVariable("targetId") int targetId, @PathVariable("amount") double amount) {
+
+		return accountService.transferMoney(sourceId, targetId, amount);
 	}
 
 }
