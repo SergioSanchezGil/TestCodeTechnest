@@ -42,7 +42,7 @@ public class Account {
 	@Column(name="BALANCE", nullable=false)
 	private double balance;
 	
-	@Column(name="TREASURY", nullable=false)
+	@Column(name="TREASURY", updatable=false, nullable=false)
 	private boolean treasury;
 	
 	
